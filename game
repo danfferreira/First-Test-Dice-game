@@ -1,0 +1,69 @@
+import random
+from datetime import datetime
+a = input("Digite seu nome: ")
+b = input("Digite sua idade: ")
+year = datetime.now()
+age = year.year-int(b)
+box = []
+enemy = []
+play = True
+minimum = 18
+cash = int(50)
+wallet = [cash]
+
+
+print(f'Então seu nome é {a}...') 
+print(f'Seu ano de nascimento é.. hmm... {int(age)}')
+
+if int(b) < minimum: 
+ print("Pode parar, não aceitamos menores") 
+
+else:
+ print("Certo. O que acha de jogar um jogo? É de pura sorte")
+ choice = input("Quer jogar? Sim / Não ")
+ choose = ["Sim","Não"]
+ while choice not in choose:
+  print("Sim ou Não?")
+  choice = input("Quer jogar? Sim / Não: ")
+  if choice == "Não":
+   print("Que pena. Até a próxima")
+ else:
+  print("Vamos rolar um dado de 6 faces!")
+  print(f'Você tem {cash} fichas')
+  while play: 
+   times = input("Quantas vezes vamos rolar?")
+   print(f'Ok, serão {times} dados')
+   aposta = input("Digite o quanto quer apostar")
+   for i in range(int(times)): 
+    print("Vamos rolar um dado então...")
+    input("Pressione enter para continuar... ")
+    n = random.randint(1,6)
+    ne = random.randint(1,6)
+    box.append(n)
+    enemy.append(ne)
+    print(f"O seu resultado foi {box}")
+    print(f"O meu resultado foi {enemy}")
+    resultbox = sum(box)
+    resultenemy = sum(enemy)  
+   if resultbox > resultenemy: 
+    print(f"Parabéns {a}! Você venceu")
+    result= cash + int(aposta)*2
+    cash = result
+    wallet = [result]
+    print(f'Seu saldo é de {wallet}')
+   else:  
+    print("Parece que eu venci")
+    result = cash - int(aposta)
+    cash = result
+    wallet = [cash]
+    print(f'Seu saldo é de {wallet}')
+    box.clear()
+    enemy.clear()
+   if wallet == [0]: 
+    play = False
+    print("Acabaram suas fichas, obrigado por jogar!")
+   else:
+    keep = input("Quer jogar de novo?")
+    if keep != "Sim": 
+     play = False
+     print("Obrigado por jogar!")
